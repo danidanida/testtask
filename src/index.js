@@ -6,6 +6,12 @@ import reportWebVitals from './reportWebVitals';
 
 import {Tree} from './components/Tree';
 
+import { startMirage } from './server-mock'
+
+if (process.env.NODE_ENV === 'development') {
+  startMirage()
+}  
+
 ReactDOM.render(
   <div>
     <Tree/>

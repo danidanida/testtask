@@ -1,36 +1,26 @@
 import React, {PureComponent} from 'react';
 import {Treebeard} from 'react-treebeard';
 
-const data = {
-    name: 'root',
-    toggled: true,
-    children: [
-        {
-            name: 'parent',
-            children: [
-                { name: 'child1' },
-                { name: 'child2' }
-            ]
-        },
-        {
-            name: 'loading parent',
-            loading: true,
-            children: []
-        },
-        {
-            name: 'parent',
+const data = [
+            {name: 'Name 1',
             children: [
                 {
-                    name: 'nested parent',
+                    name: 'Name 2',
                     children: [
-                        { name: 'nested child 1' },
-                        { name: 'nested child 2' }
+                        { name: 'Name 3' },
+                        { name: 'Name 4' }
                     ]
                 }
             ]
+        },
+        {
+            name: 'Name 5',
+            children: [
+                { name: 'Name 6' }
+            ]
         }
-    ]
-};
+    ];
+
 
 export class Tree extends PureComponent {
     constructor(props){
@@ -50,7 +40,25 @@ export class Tree extends PureComponent {
         }
         this.setState(() => ({cursor: node, data: Object.assign({}, data)}));
     }
-    
+    async componentDidMount() {
+        const URL = '/api/regions'; 
+        const response = await fetch(URL);
+        //console.log(response)
+        const data = await response.json()
+        const formatedData = data.sort(this.changeData)
+        this.setState({data:formatedData})
+    }
+
+    changeData (a, b) {
+        if ( a.path < b.path ){
+          return -1;
+        }
+        if ( a.path > b.path ){
+          return 1;
+        }
+        return 0;
+      }
+
     render(){
         const {data} = this.state;
         return (
