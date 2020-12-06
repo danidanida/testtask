@@ -14,7 +14,7 @@ export class Tree extends PureComponent {
     onToggle(node, toggled){
         const {cursor, data} = this.state;
         if (cursor) {
-            this.setState(() => ({cursor, active: false}));
+            this.setState(() => ({cursor, active: true}));
         }
         node.active = true;
         if (node.children) { 
@@ -44,7 +44,10 @@ export class Tree extends PureComponent {
         return 0;
       } */ 
        modifyData (arrayOfObjects) {
-        let data = [
+        let data = {
+            //name: 'root',
+            toggled: true, 
+            children:[
                    {name:  'Name',
                    toggled:true,
                    children: [
@@ -69,14 +72,14 @@ export class Tree extends PureComponent {
                        { name: 'Name' }
                    ]
                }
-           ];
+           ]};
        
-       data[0].name = arrayOfObjects[0].name 
-       data[1].name = arrayOfObjects[1].name  
-       data[0].children[0].name = arrayOfObjects[2].name
-       data[0].children[0].children[0].name = arrayOfObjects[3].name  
-       data[0].children[0].children[1].name = arrayOfObjects[4].name
-       data[1].children[0].name = arrayOfObjects[5].name 
+       data.children[0].name = arrayOfObjects[0].name 
+       data.children[1].name = arrayOfObjects[1].name  
+       data.children[0].children[0].name = arrayOfObjects[2].name
+       data.children[0].children[0].children[0].name = arrayOfObjects[3].name  
+       data.children[0].children[0].children[1].name = arrayOfObjects[4].name
+       data.children[1].children[0].name = arrayOfObjects[5].name 
        
          return data
          
