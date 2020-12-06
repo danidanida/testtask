@@ -1,7 +1,7 @@
 import React, {PureComponent} from 'react';
 import {Treebeard} from 'react-treebeard';
 
-const data = [ ];
+const data = [];
 
 
 export class Tree extends PureComponent {
